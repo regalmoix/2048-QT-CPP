@@ -6,8 +6,7 @@
 #include <QDebug>
 #include <QResizeEvent>
 
-QGameOverWindow::QGameOverWindow(QWidget *parent) :
-    QWidget(parent)
+QGameOverWindow::QGameOverWindow(QWidget *parent) : QWidget(parent)
 {
     setStyleSheet("QGameOverWindow { background: rgb(237,224,200); }");
     setFixedSize(425,205);

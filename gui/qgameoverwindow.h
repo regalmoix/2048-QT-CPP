@@ -8,17 +8,14 @@ class QResetButton;
 class QGameOverWindow : public QWidget
 {
     Q_OBJECT
-public:
-    explicit QGameOverWindow(QWidget *parent = 0);
 
-    QResetButton* getResetBtn() const;
+    public:
+        explicit QGameOverWindow(QWidget *parent = 0);
 
-signals:
-
-public slots:
-
-private:
-    QResetButton* reset;
+        QResetButton* getResetBtn() const;
+        
+    private:
+        QResetButton* reset;
 
 };
 

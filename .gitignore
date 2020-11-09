@@ -1,4 +1,6 @@
-ExpGame.pro.user
+*.pro.user
 .vscode
 .o
 .out
+moc_*
+*.o

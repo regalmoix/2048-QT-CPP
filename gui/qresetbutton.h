@@ -6,16 +6,14 @@
 class QResetButton : public QLabel
 {
     Q_OBJECT
-public:
-    QResetButton( QWidget* parent = 0);
+    public:
+        QResetButton( QWidget* parent = 0);
 
-signals:
-    void clicked();
+    signals:
+        void clicked();
 
-public slots:
-
-protected:
-    void mousePressEvent(QMouseEvent* event);
+    protected:
+        void mousePressEvent(QMouseEvent* event);
 
 };
 

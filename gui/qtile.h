@@ -3,22 +3,16 @@
 
 #include <QLabel>
 
-class Tile;
-
 class QTile : public QLabel
 {
     Q_OBJECT
-public:
-    QTile(const QString & text);
-    QTile(Tile* tile);
+    
+    public:
+        QTile(int x);
+        void draw();
 
-    void draw();
-private:
-    Tile* tile;
-
-signals:
-
-public slots:
+    private:
+        int val;
 
 };
 

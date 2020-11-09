@@ -1,54 +1,57 @@
 #ifndef QGAMEBOARD_H
 #define QGAMEBOARD_H
 
-#include "core/observer.h"
 #include "qgameoverwindow.h"
+#include "core/global.h"
 
 #include <QVector>
 #include <QWidget>
+#include <vector>
 
 class QResetButton;
-class Game;
 class QKeyEvent;
 class QTile;
 class QGridLayout;
 class QVBoxLayout;
 class QLabel;
 
-class QGameBoard : public QWidget, public Observer
+class QGameBoard : public QWidget
 {
     Q_OBJECT
-public:
-    explicit QGameBoard(QWidget *parent = 0);
-    ~QGameBoard();
+    
+    public:
+        std::vector<vector<int>> myboard;
+        //QVector<QVector<int> > 
+        explicit QGameBoard(QWidget *parent = 0);
+        ~QGameBoard();
 
-    void notify();
 
-private:
+    private:
 
-    Game* game;
-    // gui representation of board
-    QVector<QVector<QTile*> > gui_board;
-    // main layout
-    QVBoxLayout *mainLayout;
-    // grid layout of board
-    QGridLayout *boardLayout;
-    // score widget
-    QLabel *score;
-    // game over widget
-    QGameOverWindow gameOverWindow;
-    // winner widget
-    QLabel *youwin;
+        // gui representation of board
+        QVector<QVector<QTile*> > gui_board;
+        QVector<QVector<QLabel*> > gui_label;
+        // main layout
+        QVBoxLayout *mainLayout;
+        // grid layout of board
+        QGridLayout *boardLayout;
+        // score widget
+        QLabel *score;
+        // game over widget
+        QGameOverWindow gameOverWindow;
+        // winner widget
+        QLabel *youwin;
 
-    void drawBoard();
+        void drawBoard();
 
-protected:
-    void keyPressEvent(QKeyEvent *event);
+    protected:
+        void keyPressEvent(QKeyEvent *event);
 
-signals:
+    signals:
 
-public slots:
-    void resetGame();
+    public slots:
+        void resetGame();
+    
 
 };
 

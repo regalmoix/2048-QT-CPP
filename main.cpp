@@ -4,9 +4,8 @@
 #include <iostream>
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
-#include "core/board.h"
+#include "core/global.h"
 #include "gui/qgameboard.h"
-
 #include "gui/qgameoverwindow.h"
 
 int main(int argc, char *argv[])

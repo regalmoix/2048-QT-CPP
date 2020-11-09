@@ -1,8 +1,5 @@
 #include "gui/qgameboard.h"
-#include "core/board.h"
-#include "core/game.h"
 #include "gui/qtile.h"
-#include "core/tile.h"
 #include "gui/qresetbutton.h"
 
 #include <QVBoxLayout>
@@ -12,19 +9,28 @@
 #include <QKeyEvent>
 #include <QVBoxLayout>
 #include <QString>
-
 #include <QDebug>
+
+#include <iostream>
+
+#include <math.h>
+
+#include <core/global.h>
 
 QGameBoard::~QGameBoard()
 {
-    delete game;
+    //delete game;
 }
 
-QGameBoard::QGameBoard(QWidget *parent) :
-    QWidget(parent)
+QGameBoard::QGameBoard(QWidget *parent) : QWidget(parent)
 {
     // set default size
     resize(650,450);
+
+    //std::vector<vector<int>> myboard(4, vector<int> (4,0));
+    //boardinit(4);
+
+
 
     // create the main layout
     mainLayout = new QVBoxLayout();
@@ -33,21 +39,36 @@ QGameBoard::QGameBoard(QWidget *parent) :
     // will be created in drawBoard()
     boardLayout = NULL;
 
-    // create the game and register as observer
-    game = new Game(4);
-    game->registerObserver(this);
-
     // create the gui board and draw it
-    gui_board.resize(game->getGameBoard()->getDimension());
-    for (int i = 0; i < game->getGameBoard()->getDimension(); ++i)
-        gui_board[i].resize(game->getGameBoard()->getDimension());
-    for (int i = 0; i < game->getGameBoard()->getDimension(); ++i)
-        for (int j = 0; j < game->getGameBoard()->getDimension(); ++j)
+    gui_board.resize(4);
+
+    myboard.resize(4);
+
+    for (int i = 0; i < 4; ++i)
+    {
+        gui_board[i].resize(4);
+        myboard[i].resize(4);
+    }
+
+    boardinit(4);
+
+    input(myboard, 4);
+        
+    for (int i = 0; i < 4; ++i)
+    {
+        for (int j = 0; j < 4; ++j)
+        {
             gui_board[i][j] = NULL;
+            //myboard[i][j] = 4;    
+        }
+    }
+
+    
+
     drawBoard();
 
     // create the score widget and add it to the board
-    score = new QLabel(QString("SCORE: %1").arg(game->getScore()));
+    score = new QLabel(QString("SCORE: %1").arg(420));
     score->setStyleSheet("QLabel { color: rgb(235,224,214); font: 16pt; }");
     score->setFixedHeight(50);
     mainLayout->insertWidget(1, score, 0, Qt::AlignRight);
@@ -58,33 +79,49 @@ QGameBoard::QGameBoard(QWidget *parent) :
     connect(gameOverWindow.getResetBtn(), SIGNAL(clicked()), this, SLOT(resetGame()));
 }
 
+
+// Currently Only Prints to console
 void QGameBoard::keyPressEvent(QKeyEvent *event)
 {
-    switch (event->key()) {
-    case Qt::Key_Up:
-        game->move(UP);
-        break;
-    case Qt::Key_Left:
-        game->move(LEFT);
-        break;
-    case Qt::Key_Right:
-        game->move(RIGHT);
-        break;
-    case Qt::Key_Down:
-        game->move(DOWN);
-        break;
+    
+    switch (event->key()) 
+    {
+        case Qt::Key_Up:
+            qDebug() << "up";
+            up(myboard ,4);
+            break;
+        case Qt::Key_Left:
+            qDebug() << "left";
+            left(myboard ,4);
+            break;
+        case Qt::Key_Right:
+            qDebug() << "right";
+            right(myboard ,4);
+            break;
+        case Qt::Key_Down:
+            qDebug() << "down";
+            down(myboard ,4);
+            break;
     }
-}
 
-void QGameBoard::notify()
-{
-    if (game->isGameOver())
-        gameOverWindow.show();
+    emptycell(myboard, 4);
 
-    if (game->won())
-        score->setText(QString("You hit 2048, congratulations! Keep playing to increase your score.\t\t SCORE: %1").arg(game->getScore()));
-    else
-        score->setText(QString("SCORE: %1").arg(game->getScore()));
+    if (emptypos.empty() && !checkmove(myboard, 4))
+    {
+        /*
+            //move(6*n, 0);
+            system("clear");
+            printf("\n\nGame Ended, Out of Moves.\nFinal Score : %d \nPress any key to quit.", score);
+            cin.get();
+            //return endwin();
+            return 0;
+        */
+        resetGame();        //?? or is it?
+
+    }
+
+    addrandom(myboard);
+    emptycell(myboard, 4);
 
     drawBoard();
 }
@@ -93,10 +130,19 @@ void QGameBoard::drawBoard()
 {
     delete boardLayout;
     boardLayout = new QGridLayout();
-    for (int i = 0; i < game->getGameBoard()->getDimension(); ++i) {
-        for (int j = 0; j < game->getGameBoard()->getDimension(); ++j) {
+
+    for (int i = 0; i < 4; ++i)
+    {
+        for (int j = 0; j < 4; ++j) 
+        {
             delete gui_board[i][j];
-            gui_board[i][j] = new QTile(game->getGameBoard()->getTile(i,j));
+            int x = myboard[i][j];
+
+            //cin >> x;
+
+            
+            gui_board[i][j] = new QTile(x);
+            
             boardLayout->addWidget(gui_board[i][j], i, j);
             gui_board[i][j]->draw();
         }
@@ -104,11 +150,11 @@ void QGameBoard::drawBoard()
     mainLayout->insertLayout(0, boardLayout);
 }
 
-
+//Change to Close Game
 void QGameBoard::resetGame()
 {
-    game->restart();
+    //game->restart();
     drawBoard();
-    score->setText(QString("SCORE: %1").arg(game->getScore()));
+    score->setText(QString("SCORE: %1").arg(420));
     gameOverWindow.hide();
 }
