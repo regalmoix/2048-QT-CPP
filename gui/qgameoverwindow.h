@@ -2,6 +2,8 @@
 #define QGAMEOVERWINDOW_H
 
 #include <QWidget>
+#include <QLabel>
+
 
 class QResetButton;
 
@@ -12,10 +14,13 @@ class QGameOverWindow : public QWidget
     public:
         explicit QGameOverWindow(QWidget *parent = 0);
 
-        QResetButton* getResetBtn() const;
+        //QResetButton* getResetBtn() const;
+        QLabel* getSCBtn() const;
         
     private:
-        QResetButton* reset;
+        //QResetButton* reset;
+        QLabel* SC;
+
 
 };
 

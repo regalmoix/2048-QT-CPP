@@ -8,27 +8,30 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = ExpGame
+TARGET = 2048_PoPL
 TEMPLATE = app
 QMAKE_CXXFLAGS += -std=c++11
+
+DESTDIR = build/
+
+OBJECTS_DIR = $$DESTDIR/.obj
+MOC_DIR = $$DESTDIR/.moc
+RCC_DIR = $$DESTDIR/.qrc
+UI_DIR = $$DESTDIR/.ui
+
 
 SOURCES += main.cpp\
     gui/mainwindow.cpp \
     gui/qgameboard.cpp \
     gui/qtile.cpp \
-    gui/qresetbutton.cpp \
     gui/qgameoverwindow.cpp \
     core/input.cpp \
-    core/notmain.cpp \
-    core/output.cpp \
     core/process.cpp \
     core/randomgen.cpp
 
 HEADERS  += gui/mainwindow.h \
     gui/qgameboard.h \
     gui/qtile.h \
-    gui/qresetbutton.h \
     gui/qgameoverwindow.h \
-    gui/qwinwindow.h \
     core/global.h
 

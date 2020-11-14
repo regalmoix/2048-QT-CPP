@@ -5,6 +5,8 @@
 using namespace std;
 
 int score = 0;
+int gamescore = 0;
+
 
 std::vector<std::pair<int, int>> emptypos;
 
@@ -56,6 +58,7 @@ void left (vector<vector<int>>& board, int n)
             {
                 temp2[j] = 2 * row[i];
                 score += 2*row[i];
+                gamescore = score;
                 i += 2;
                 j++;
             }

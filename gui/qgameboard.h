@@ -23,6 +23,7 @@ class QGameBoard : public QWidget
         std::vector<vector<int>> myboard;
         //QVector<QVector<int> > 
         explicit QGameBoard(QWidget *parent = 0);
+        void doCalc();
         ~QGameBoard();
 
 
@@ -38,9 +39,9 @@ class QGameBoard : public QWidget
         // score widget
         QLabel *score;
         // game over widget
-        QGameOverWindow gameOverWindow;
+        //QGameOverWindow gameOverWindow;
         // winner widget
-        QLabel *youwin;
+        // QLabel *youwin;
 
         void drawBoard();
 

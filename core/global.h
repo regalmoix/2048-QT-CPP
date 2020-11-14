@@ -11,6 +11,8 @@
 using namespace std;
 
 extern int score;
+extern int gamescore;
+
 extern std::vector<std::pair<int, int>> emptypos;
 extern vector<vector<int>> myboard;
 
@@ -36,6 +38,6 @@ void down (vector<vector<int>>& board, int n);
 void up (vector<vector<int>>& board, int n);
 void emptycell(vector<vector<int>>& board, int n);
 
-int printboard(vector<vector<int>>& board, int n);
-int tilemove (vector<vector<int>>& board, int n);
+//int printboard(vector<vector<int>>& board, int n);
+//int tilemove (vector<vector<int>>& board, int n);
 bool checkmove (vector<vector<int>>& board, int n);

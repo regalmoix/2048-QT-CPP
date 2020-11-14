@@ -6,3 +6,6 @@ moc_*
 *.o
 .temp
 .vscode
+*.stash
+Makefile
+build
