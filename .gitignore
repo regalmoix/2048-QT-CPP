@@ -9,3 +9,5 @@ moc_*
 *.stash
 Makefile
 build
+inputfile
+inputfile0
