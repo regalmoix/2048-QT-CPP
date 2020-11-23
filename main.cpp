@@ -1,5 +1,7 @@
 #include "gui/mainwindow.h"
 #include <QApplication>
+#include <QKeyEvent>
+#include <QThread>
 
 #include <iostream>
 #include <stdlib.h>     /* srand, rand */
@@ -15,6 +17,9 @@ int main(int argc, char *argv[])
     srand(time(NULL));
     QGameBoard board;
     board.show();
+
+    
+
 
     return a.exec();
 }

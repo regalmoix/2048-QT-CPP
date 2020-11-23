@@ -42,12 +42,14 @@ class QGameBoard : public QWidget
         //QGameOverWindow gameOverWindow;
         // winner widget
         // QLabel *youwin;
+        int over;
 
         void drawBoard();
 
     protected:
         void keyPressEvent(QKeyEvent *event);
 
+        
     signals:
 
     public slots:

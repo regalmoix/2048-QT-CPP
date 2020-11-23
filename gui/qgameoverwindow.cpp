@@ -16,7 +16,7 @@ QGameOverWindow::QGameOverWindow(QWidget *parent) : QWidget(parent)
     
     
     SC = new QLabel("Score ", this);
-    qDebug() << "in over " << gamescore;
+    //qDebug() << "in over " << gamescore;
     SC->setText(QString("Score = %1").arg(gamescore));
     SC->setAlignment(Qt::AlignCenter);
     SC->setStyleSheet("QLabel { background-color: rgb(143,122,102); border-radius: 10px; font: bold; color: white; }");
@@ -32,6 +32,8 @@ QGameOverWindow::QGameOverWindow(QWidget *parent) : QWidget(parent)
     
     // add score button to window
     layout->insertWidget(1,SC,0,Qt::AlignCenter);
+    //QThread::sleep(5);
+    
 }
 
 
